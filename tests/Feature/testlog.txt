@@ -1,0 +1,23 @@
+Response from get(/eventList):
+
+HTTP/1.1 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Tue, 12 Jan 2021 15:51:44 GMT
+Set-Cookie:    XSRF-TOKEN=eyJpdiI6IkdNVG83KzFqcStSRWRkeTB5M0x3NEE9PSIsInZhbHVlIjoiaEZmei9yZHFmbkVwZ0JtcFQwcWs4ZStqVEx6ZEltS3c1RENZWEszYWJ5L0w2SGM1U0hqSTkvQzBNdmNQdjR2Um0xRHFwQTYvOXhKbDlPeUFpd2hlbUZNQjRPaE1aYnJ2OHQ3bmVLVGE2R2VNK1c5VzZSV0xYZUswQWpDUE10OUQiLCJtYWMiOiJiNDNlNzc2YzkyMDFlYzI5ZGRmNGQ5ZTU2ODk0YzMzOGU5ODI2NjM1NDIxNDFlODMzZWZjYmQxYTY1MDY2NmUwIn0%3D; expires=Tue, 12-Jan-2021 17:51:44 GMT; Max-Age=7200; path=/; samesite=lax
+Set-Cookie:    laravel_session=eyJpdiI6ImlYN3JvL3lWVHFKU1pEQTlyRGIyeUE9PSIsInZhbHVlIjoiQmoxZEJ6MHE1UDNzS2dWdWlZU1AvMnEwenNmcEQ3cjVnWnpMd2lzS3BoeFFqSkF2bWE1UG1WbVFGSHdOakxrUXE0c3JVYk9LcXhpUWpuUW1mcGlQRVJ2UUJabi9uanAwNHJ1WjhUaHN0cE93VXIwREV2SkpneS9PaGt5b2lOV3oiLCJtYWMiOiJiODE5ZjE1ZWU5Y2JlNWM0ZDRmYWU5ZWM4MmFhMGIxMDY2Mjk2ODY2NjFkZThkYjlhNWIwMTJiZTBmZDBkMzkxIn0%3D; expires=Tue, 12-Jan-2021 17:51:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+
+{"success":1,"message":[{"eventId":"4c357fots6j4dfqc7jdij056k8","eventTitle":"Frukostm\u00f6te","startTime":"2021-01-09T08:00:00+01:00","endTime":"2021-01-09T09:15:00+01:00"},{"eventId":"e3p1gd25p2m5vqmt201flkguug","eventTitle":"Tandl\u00e4karen","startTime":"2021-01-10T16:30:00+01:00","endTime":"2021-01-10T17:30:00+01:00"},{"eventId":"5gg1d79qqkr2nieqn7orbmfp6c","eventTitle":"Middag p\u00e5 O'Pizzicato","startTime":"2021-01-11T19:00:00+01:00","endTime":"2021-01-11T20:45:00+01:00"},{"eventId":"03uuovf1k959nipbh5tsl907c0","eventTitle":"F\u00f6delsedagsfest","startTime":"2021-01-23T17:00:00+01:00","endTime":"2021-01-23T21:15:00+01:00"},{"eventId":"p345f6c797bjdm7knvve9p0rpo","eventTitle":"L\u00e4mna in bilen p\u00e5 verkstad","startTime":"2021-02-04T07:00:00+01:00","endTime":"2021-02-04T08:00:00+01:00"}]}
+
+
+Response from get(/eventList):
+
+HTTP/1.1 200 OK
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Tue, 12 Jan 2021 16:14:45 GMT
+Set-Cookie:    XSRF-TOKEN=eyJpdiI6IjloQnVqZUtVcnJRc0VSa2FuV2E1QkE9PSIsInZhbHVlIjoieGxHdHRwWE1MVzUyODlwYXl1YisvR092RTEyS0IyUm55ekhGTTJmVmFLeTdvWnBmWkVoWnpHV09CdmhkbGxIdlN0OFIzeHNMNnJJS0M4YklIcmpFTFVJclB6VlhyRmhjTnhWV3RMbkxNNDNmbG82MzZDRGxqc081QitOTGNscjEiLCJtYWMiOiJlYWZlMjQwZTkzMmE1OGQ5MDIzOTcwYWVjOGY5ZTQzZjJhODE4NWNhZjVlOTZmZWU3ODkzMjkzYWQyNTM4Mjk2In0%3D; expires=Tue, 12-Jan-2021 18:14:45 GMT; Max-Age=7200; path=/; samesite=lax
+Set-Cookie:    laravel_session=eyJpdiI6IlZKWmJha2JCTCtvWGZUbmlleitYNWc9PSIsInZhbHVlIjoicnhLRlhrbVdYTDk2SFB3dFpISjFEQUg4dkRZZ3R0TiszTHdyM29JM0xrQUViaVVyYWlNRTRteFd0Ri85L2NMVEdZRE9tVURnSHVpZHluU3hzb0ljV1RvNnQySVNydlVwYWVwUmY0eGNuNThGdE8ralBEWks0OWR0bHoxK25wTG8iLCJtYWMiOiIwYzc1MTFjOTFkMmVkNjEwMjlhM2Q2Yjk4YzRmNzk5OTFmZGY2ZTBhMThiNzBhNTYwYjQ3YzlkYmEyYmEyODVlIn0%3D; expires=Tue, 12-Jan-2021 18:14:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+
+{"success":0,"url":"https:\/\/accounts.google.com\/o\/oauth2\/auth?response_type=code&access_type=offline&client_id=494562882004-492ejte05ubf600cmrb6jcl2almjec12.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&state&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar.events&prompt=select_account%20consent"}
+
