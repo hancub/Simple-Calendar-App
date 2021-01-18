@@ -232,13 +232,13 @@
 				.then(res => {
                     if(res.data.success == '1') {
 						createEvent(week, day, startTime, endTime, eventTitle, id, res.data.eventId);
-						alert('Operation successful');
+						alert('Operation successful: Event created');
 					}
 					else {
 						alert('Operation failed: Google Calender API failure');
 					}
                 }).catch((error) => {
-					alert('Operation failed: ' + error.response.data.message);
+					alert('Operation failed: ' + error);
 				});
 			}
 		},
@@ -283,13 +283,21 @@
 					.then(res => {
 						if(res.data.success == '1') {
 							updateEvent(startTime, endTime, eventTitle, id, eventId);
-							alert('Operation successful');
+							alert('Operation successful: Event has been updated');
 						}
 						else {
-							alert('Operation failed: Google Calender API failure');
+							if(res.data.message == 'exist')
+								alert('Operation failed: The event already exists');
+							else
+								alert('Operation failed: Google Calender API failure');
 						}
 					}).catch((error) => {
-						alert('Operation failed: ' + error.response.data.message);
+						if(error.response.status == 410) {
+							removeEvent(eventId);
+							alert('Operation failed: ' + "Event doesn't exist");							
+						}
+						else
+							alert('Operation failed: ' + error);
 					});
 				}
 			}
@@ -314,13 +322,19 @@
 				}).then(res => {
                     if(res.data.success == '1') {
 						removeEvent(eventId);
-						alert('Operation successful');
+						alert('Operation successful: Event has been deleted');
 					}
 					else {
-						alert('Operation failed: Google Calender API failure');
+						if (res.data.message == 'failed')
+							alert('Operation failed: Google Calender API failure');
 					}
                 }).catch((error) => {
-					alert('Operation failed:' + error.response.data.message);
+						if(error.response.status == 410) {
+							removeEvent(eventId);
+							alert('Operation failed: ' + "Event doesn't exist");							
+						}
+						else
+							alert('Operation failed: ' + error); 
 				});
 			}
 		},
@@ -350,7 +364,7 @@
 							alert('Operation failed: Google Calender API failure');
 					}
                 }).catch((error) => {
-					alert('Operation failed:' + error.response.data.message);
+					alert('Operation failed: ' + error);
 			});
 		},
 		
@@ -377,7 +391,7 @@
 						alert('Operation failed: Google Calender API failure');
 					}
                 }).catch((error) => {
-					alert('Operation failed: ' + error.response.data.message);
+					alert('Operation failed: ' + error);
 			});
 		},
 		
