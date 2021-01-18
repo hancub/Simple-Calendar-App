@@ -114,6 +114,7 @@ class GoogleCalendar {
 			throw new \Exception('Missing client');
 	}
 	
+	
 	/**
 	*  	Retrives a list of events from the users primary calender. 
 	*  	
@@ -137,11 +138,11 @@ class GoogleCalendar {
 	*  	Deletes an event from the users primary calender. 
 	*  	
 	*	@param $eventId - The unique event identifier
-	*   @return - An empty response body if the operation succeeded or the string 'failed' otherwise
+	*   @return - An empty response body if the operation succeeded or the string 'failed' (operation failed)    
 	*/
 	function deleteEvent($eventId){
 		if($this->isConnected()){
-			$service = new \Google_Service_Calendar($this->client);
+			$service = new \Google_Service_Calendar($this->client);			
 			return $service->events->delete('primary', $eventId);
 		}
 		return 'failed';
@@ -152,29 +153,50 @@ class GoogleCalendar {
 	*  	Updates an event in the users primary calender. 
 	*  	
 	*	@param $event - An event object containing id, summary, start, end
-	*   @return - An event response body if the operation succeeded or an empty string if it failed	
+	*   @return - An event response body if the operation succeeded, the string 'exist' (event exist) or the string 'failed' (operation failed) 	
 	*/
 	function updateEvent($event){
-		if($this->isConnected()){
+		if($this->isConnected()){	
 			$service = new \Google_Service_Calendar($this->client);
-			
+			$updated = false;
+		
 			$updateEvent = $service->events->get('primary', $event->{'id'});
-			$updateEvent->setSummary($event->{'title'});
 			
-			$start = new \Google_Service_Calendar_EventDateTime();
-			$start->setDateTime($event->{'start'});
-			$start->setTimeZone('Europe/Stockholm');
-			$updateEvent->setStart($start);
+			$oldTitle = $updateEvent->getSummary(); 
+			if($oldTitle !== $event->{'title'}){
+				$updateEvent->setSummary($event->{'title'});
+				$updated = true;
+			}			
+			 
+			$oldStartDate = new \DateTime($updateEvent->getStart()->getDateTime());
+			$newStartDate = new \DateTime($event->{'start'});
 			
-			$end = new \Google_Service_Calendar_EventDateTime();
-			$end->setDateTime($event->{'end'});
-			$end->setTimeZone('Europe/Stockholm');
-			$updateEvent->setEnd($end);
+			if($oldStartDate != $newStartDate){
+				$start = new \Google_Service_Calendar_EventDateTime();
+				$start->setDateTime($event->{'start'});
+				$start->setTimeZone('Europe/Stockholm');
+				$start->setDateTime($event->{'start'});
+				$updateEvent->setStart($start);
+				$updated = true;
+			}
 			
-			return $service->events->update('primary', $updateEvent->getId(), $updateEvent);
+			$oldEndDate = new \DateTime($updateEvent->getEnd()->getDateTime());
+			$newEndDate = new \DateTime($event->{'end'});
+			
+			if($oldEndDate != $newEndDate){
+				$end = new \Google_Service_Calendar_EventDateTime();	
+				$end->setDateTime($event->{'end'});
+				$end->setTimeZone('Europe/Stockholm');
+				$updateEvent->setEnd($end);
+				$updated = true;		
+			}
+			if($updated)
+				return $service->events->update('primary', $updateEvent->getId(), $updateEvent);
+			else
+				return 'exist';
 		}
 		else
-			return '';
+			return 'failed';
 	}
 	
 	
@@ -182,7 +204,7 @@ class GoogleCalendar {
 	*  	Creates a new event in the users primary calender. 
 	*  	
 	*	@param $event - An event object containing summary, start, end
-	*   @return - A unique event identifier if the operation succeeded or an empty string if it failed	
+	*   @return - A unique event identifier if the operation succeeded or the string 'failed' (operation failed)	
 	*/
 	function createEvent($event){
 		if($this->isConnected()){
@@ -203,7 +225,7 @@ class GoogleCalendar {
 			return $newEvent->id;
 		}
 		else 
-			return '';
+			return 'failed';
 	}
 	
 	
