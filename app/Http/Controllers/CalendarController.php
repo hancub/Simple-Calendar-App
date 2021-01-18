@@ -46,7 +46,7 @@ class CalendarController extends Controller
 			}
 			catch (\Exception $excep_url) {
 				// An unexpected error occured
-				return response()->json(['message' => $excep_url->getMessage()], 503);
+				return response()->json(['message' => $excep_url->getMessage()], $excep_url->getCode());
 			}
 		}
     }
@@ -88,7 +88,7 @@ class CalendarController extends Controller
 		}
 		catch (\Exception $excep_conn) {
 			// An unexpected error occured  
-			return response()->json(['message' => $excep_conn->getMessage()], 503);
+			return response()->json(['message' => $excep_conn->getMessage()], $excep_conn->getCode());
 		}
 	}
     
@@ -119,13 +119,13 @@ class CalendarController extends Controller
 			// Create the event
 			$eventId = $calendar->createEvent($event);
 			
-			if(!empty($eventId))
+			if($eventId !== 'failed')
 				return response()->json(['success' => 1, 'eventId' => $eventId]);
 			else	
 				return response()->json(['success' => 0]);
 		}	
 		catch (\Exception $excep_conn) {
-			return response()->json(['message' => $excep_conn->getMessage()], 503);
+			return response()->json(['message' => $excep_conn->getMessage()], $excep_conn->getCode());
 		}
 	}
 	
@@ -156,14 +156,14 @@ class CalendarController extends Controller
 			// Delete the event 
 			$deleteEvent = $calendar->deleteEvent($eventId);
 			
-			if($deleteEvent !== 'failed')
+			if($deleteEvent !== 'failed') 
 				return response()->json(['success' => 1]);
 			else
 				return response()->json(['success' => 0]);
 		}
 		catch (\Exception $excep_conn) {
-			return response()->json(['message' => $excep_conn->getMessage()], 503);
-		}
+			return response()->json(['message' => $excep_conn->getMessage()], $excep_conn->getCode());
+		}	
 	}
 	
 	
@@ -184,7 +184,7 @@ class CalendarController extends Controller
 		$json_obj = json_decode($json_str);
 	
 		// Get the event object
-		$event = $json_obj->{'params'};
+		$event = $json_obj->{'params'};		
 		
 		try {
 			// Connect to Google Calender API 
@@ -193,13 +193,13 @@ class CalendarController extends Controller
 			// Update the event
 			$updatedEvent = $calendar->updateEvent($event);
 			
-			if(!empty($updatedEvent))
+			if($updatedEvent !== 'failed' && $updatedEvent !== 'exist')
 				return response()->json(['success' => 1]);
 			else
-				return response()->json(['success' => 0]);
+				return response()->json(['success' => 0, 'message' => $updatedEvent]);
 		}
 		catch (\Exception $excep_conn) {
-			return response()->json(['message' => $excep_conn->getMessage()], 503);
+			return response()->json(['message' => $excep_conn->getMessage()], $excep_conn->getCode());
 		}
 	}
 	
